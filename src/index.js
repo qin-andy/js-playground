@@ -1,19 +1,48 @@
-import React from "react"
-import ReactDOM from "react-dom"
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const element = <h1>Hello from Create React App</h1>
+class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {date: new Date()};
+    }
 
-ReactDOM.render(element, document.getElementById("root"))
+    componentDidMount() {
+        this.timerID = setInterval(
+            () => this.tick(),
+            1000
+        );
+    }
 
-function Book(title, genre, author) {
-    this.title = title;
-    this.genre = genre;
-    this.author = author;
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    tick() {
+        this.setState({
+            date: new Date()
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>
+                    Hello, world!
+                </h1>
+                <h2>
+                    The current time is {this.state.date.toLocaleTimeString()}.
+                </h2>
+            </div>
+        );
+    }
 }
 
-Book.prototype.details = function() {
-    return "Name: " + this.author + " | Title: " + this.title + " | Genre: " + this.genre;
+function tick() {
+    ReactDOM.render(
+        <Clock />,
+        document.getElementById("root")
+    )
 }
 
-const book1 = new Book("The Bigsmoh", "Smoh Story", "Tinysnout the Brave");
-const book2 = new Book("The Remains of the Day", "Comedy", "Kazuo Ishiguro");
+setInterval(tick, 1000);
