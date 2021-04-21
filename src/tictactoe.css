@@ -1,0 +1,48 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+.game {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 90vmin;
+  height: 90vmin;
+  margin: auto;
+}
+
+.board {
+  display: table;
+  border-collapse: collapse;
+}
+
+.row {
+  display: table-row;
+  overflow: hidden;
+  height: 30vmin;
+}
+
+.cell {
+  width: 30vmin;
+  height: 30vmin;
+  position: relative;
+  border: 5px solid white;
+  display: table-cell;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.cell:hover {
+  background-color: rgb(34, 34, 34);
+}
+
+.x {
+  background-color: red;
+}
+
+.o {
+  background-color: blue;
+}
