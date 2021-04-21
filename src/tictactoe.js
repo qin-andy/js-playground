@@ -1,7 +1,7 @@
 window.addEventListener("load", init);
-const numRows = 3;
-const numCols = 3;
-const goal = 3;
+const numRows = 9;
+const numCols = 9;
+const goal = 5;
 let numEmptyCells = numRows*numCols;
 let player = 0;
 let markers = ['o', 'x'];

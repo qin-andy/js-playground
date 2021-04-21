@@ -40,9 +40,15 @@ body {
 }
 
 .x {
-  background-color: red;
+  background-image: url('../img/x.png');
 }
 
 .o {
-  background-color: blue;
+  background-image: url('../img/o.png');
+
+}
+
+.o, .x {
+  background-repeat: no-repeat;
+  background-size: cover;
 }
