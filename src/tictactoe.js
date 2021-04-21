@@ -1,4 +1,3 @@
-
 window.addEventListener("load", init);
 const numRows = 3;
 const numCols = 3;
@@ -14,8 +13,9 @@ function init() {
 }
 
 function game(e) {
-    if (gameIsOver)
+    if (gameIsOver) 
         return window.alert('Game is done!');
+
     let cell = e.target;
     let cellIndex = cell.id;
     if (board[cellIndex])
@@ -30,12 +30,10 @@ function game(e) {
         console.log('Win for player ' + markers[player]);
         return window.alert(markers[player] + ' player won!');
     }
-
     if (!numEmptyCells) {
         gameIsOver = true;
         return window.alert('Game is a draw!');
     }
-
     swapTurn();
 }
 
@@ -63,21 +61,13 @@ function buildBoard(rows, cols) {
 function checkWin(index) {
     let col = index % numRows;
     let row = (index - col) / numRows;
-
-    let colLowerBound = Math.max(0, col - goal + 1);
-    let colUpperBound = Math.min(numCols - 1, col + goal - 1);
-
-    let rowLowerBound = Math.max(0, row - goal + 1);
-    let rowUpperBound = Math.min(numRows - 1, row + goal - 1);
-
-    console.log('Placed tile for Player ' + player + ' at ' + row + ', ' + col);
+    let range = goal-1;
 
     // Checking (rows) verticals
     let consecutive = 0;
-    console.log('Checking row range from ' + rowLowerBound + ' to ' + rowUpperBound);
-
-    for (let r = rowLowerBound; r <= rowUpperBound; r++) {
-        if (board[toIndex(r, col)] === markers[player]) {
+    consecutive = 0;
+    for (let i = -range; i <= range; i++) {
+        if (checkBoard(row+i, col) === markers[player]) {
             consecutive++;
             if (consecutive === goal) {
                 return true;
@@ -89,9 +79,8 @@ function checkWin(index) {
 
     // Checking (columns) horizntals
     consecutive = 0;
-    console.log('Checking column range from ' + colLowerBound + ' to ' + colUpperBound);
-    for (let c = colLowerBound; c <= colUpperBound; c++) {
-        if (board[toIndex(row, c)] === markers[player]) {
+    for (let i = -range; i <= range; i++) {
+        if (checkBoard(row, col+i) === markers[player]) {
             consecutive++;
             if (consecutive === goal) {
                 return true;
@@ -102,6 +91,30 @@ function checkWin(index) {
     }
 
     // Checking major diagonal
+    consecutive = 0;
+    for (let i = -range; i <= range; i++) {
+        if (checkBoard(row+i, col+i) === markers[player]) {
+            consecutive++;
+            if (consecutive === goal) {
+                return true;
+            }
+        } else {
+            consecutive = 0;
+        }
+    }
+
+    // Checking minor diagonal
+    consecutive = 0;
+    for (let i = -range; i <= range; i++) {
+        if (checkBoard(row-i, col+i) === markers[player]) {
+            consecutive++;
+            if (consecutive === goal) {
+                return true;
+            }
+        } else {
+            consecutive = 0;
+        }
+    }
     return false;
 }
 

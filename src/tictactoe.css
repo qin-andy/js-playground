@@ -22,12 +22,12 @@ body {
 .row {
   display: table-row;
   overflow: hidden;
-  height: 30vmin;
+  height: 10vmin;
 }
 
 .cell {
-  width: 30vmin;
-  height: 30vmin;
+  width: 10vmin;
+  height: 10vmin;
   position: relative;
   border: 5px solid white;
   display: table-cell;
