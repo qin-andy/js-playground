@@ -40,11 +40,11 @@ body {
 }
 
 .x {
-  background-image: url('../img/x.png');
+  background-image: url('../../img/x.png');
 }
 
 .o {
-  background-image: url('../img/o.png');
+  background-image: url('../../img/o.png');
 
 }
 
