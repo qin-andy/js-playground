@@ -1,22 +1,31 @@
+import Ball from "./model/Ball.js";
+import Block from "./model/Block.js"
+import Sprite from "./model/Sprite.js"
+
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
 
-let x = canvas.width / 2;
-let y = canvas.height - 30;
+const blueSprite = new Sprite(
+  canvas.width / 2,
+  canvas.height - 30,
+  10,
+  10,
+  "#0095DD"
+);
+
 const dx = 2;
 const dy = -2;
 
+const redBlock = new Block(300, 40, 50, 50, "#FF0000");
+const ball = new Ball(40, 50, 50, 50, "#FF0000")
+
+ball.updateSpeed(40, -50);
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
-  ctx.beginPath();
-  ctx.rect(x, y, 10, 10);
-  ctx.fillStyle = "#0095DD";
-  ctx.fill();
-  ctx.closePath();
 
-  x += dx;
-  y += dy;
+  ball.draw(ctx);
+  ball.move(canvas.width, canvas.height);
 }
 
 setInterval(draw, 20);
