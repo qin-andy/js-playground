@@ -9,13 +9,11 @@ class Ball extends Sprite {
 
   bounce(canvasWidth, canvasHeight) {
     if (this.x < 0 || this.x + this.width > canvasWidth) {
-      // bounce off the left/right edges
-      this.dx *= -1; // switch direction
+      this.dx *= -1;
     }
 
     if (this.y < 0 || this.y + this.height > canvasHeight) {
-      // bounce off the top/bottom edge
-      this.dy *= -1; // switch direction
+      this.dy *= -1;
     }
   }
 
@@ -24,9 +22,15 @@ class Ball extends Sprite {
     this.dy = dy;
   }
 
-  move(canvasWidth, canvasHeight) { /* overriding the move method */
+  move(canvasWidth, canvasHeight) {
     super.move(this.dx, this.dy);
     this.bounce(canvasWidth, canvasHeight);
+  }
+
+  collides(paddle) {
+    if (this.intersects(paddle)) {
+      this.dy *= -1;
+    }
   }
 }
 
