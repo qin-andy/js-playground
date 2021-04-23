@@ -3,6 +3,11 @@ body {
   color: white;
 }
 
+nav {
+  background-color: #CCC;
+  padding: 20px;
+}
+
 .game {
   position: absolute;
   top: 0;
@@ -36,15 +41,15 @@ body {
 }
 
 .cell:hover {
-  background-color: rgb(34, 34, 34);
+  background-color: rgb(99, 99, 99);
 }
 
 .x {
-  background-image: url('../../img/x.png');
+  background-image: url('../x.png');
 }
 
 .o {
-  background-image: url('../../img/o.png');
+  background-image: url('../o.png');
 
 }
 

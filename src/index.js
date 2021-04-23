@@ -1,15 +1,26 @@
-const http = require("http");
+const path = require("path");
+const express = require("express");
 
-const PORT = 5000;
-const server = http.createServer(routes);
+const port = 5000;
+const app = express();
 
-function routes(request, response) {
-  if (request.url === "/") {
-    response.write("Hello, world!");
-  }
-  response.end();
-}
+app.use(express.static("src"));
+app.use(express.static("assets"));
 
-server.listen(PORT);
+// app.use("/public", express.static(__dirname + "/public"));
+// app.use("/src", express.static(__dirname + "/src"));
+// app.use("/assets", express.static(__dirname + "/assets"));
 
-console.log(`Server is listenning on port ${PORT}`);
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../public/index.html"));
+});
+
+app.get("/tictactoe.html", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../public/tictactoe.html"));
+});
+
+app.listen(port, () => {
+  console.log('Express app listening at localhost: ${port}');
+});
+
+console.log(`Server is listenning on port ${port}`);
