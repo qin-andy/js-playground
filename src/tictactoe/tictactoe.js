@@ -1,16 +1,27 @@
 (function () {
   window.addEventListener("load", init);
-  const numRows = 9;
-  const numCols = 9;
-  const goal = 5;
-  let numEmptyCells = numRows * numCols;
+  let numRows = 9;
+  let numCols = 9;
+  let goal = 5;
+  let numEmptyCells = 1;
+
   let player = 0;
   let markers = ['o', 'x'];
   let gameIsOver = false;
   const board = new Array(numEmptyCells);
 
   function init() {
+    document.getElementById('submit-settings').addEventListener("click", getInput);
+  }
+
+  function getInput() {
+    numRows = document.getElementById("height").value;
+    numCols = document.getElementById("width").value;
+    //goal = document.getElementById("goal").value;
+
+    numEmptyCells = numRows * numCols;
     buildBoard(numRows, numCols);
+    document.getElementById("game-settings").remove();
   }
 
   function game(e) {
