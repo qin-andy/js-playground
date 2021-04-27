@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const Note = require("./notes/model/Note.js");
+const NoteDao = require("./notes/model/NoteDao.js");
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -22,10 +23,11 @@ app.listen(port, () => {
 
 console.log(`Server is listenning on port ${port}`);
 
-const note = new Note("Hebbo World!", "Lord Kibby");
-const notes = [];
-notes.push(new Note("Hebbo World!", "Lord Kibby"));
-notes.push(new Note("I am lord Kibby!", "Lord Kibby"))
-notes.push(new Note("Down with Lord Kibby!", "Peasant Kibby"));
-notes.push(new Note("I have removed all peasant rights", "Lord Kibby"));
-console.log(notes);
+const notes = new NoteDao();
+notes.create("Hi my name is Bigsmoh", "Bigsmoh");
+notes.create("*inaduible*", "Tinysnout the Brave");
+notes.create("*still inaduible*", "Tinysnout the Brave");
+console.log(notes.readAll());
+notes.update(1, "HEBBO!", "Tinysnout the Loud");
+notes.delete(2);
+console.log(notes.readAll());
