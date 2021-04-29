@@ -44,8 +44,12 @@ app.get("/api/notes/:id", (req, res) => {
 });
 
 app.post("/api/notes", (req, res) => {
+  try {
   const content = req.body.content;
   const author = req.body.author;
   const note = notes.create(content, author);
-  res.status(201).json(note); 
+  res.status(201).json(note);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 })
