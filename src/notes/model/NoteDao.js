@@ -16,6 +16,14 @@ class NoteDao {
     this.notes.push(note);
   }
 
+  read(id) {
+    const index = this.notes.findIndex((note) => note._id === id);
+    if (index === -1) {
+      return null;
+    }
+    return this.notes[index];
+  }
+
   readAll(author = "") {
     if (author) {
       return this.notes.filter((note) => note.author === author);

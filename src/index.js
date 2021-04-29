@@ -17,6 +17,8 @@ app.get("/tictactoe.html", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../public/tictactoe.html"));
 });
 
+
+
 app.listen(port, () => {
   console.log(`Express app listening at localhost: ${port}`);
 });
@@ -27,7 +29,15 @@ const notes = new NoteDao();
 notes.create("Hi my name is Bigsmoh", "Bigsmoh");
 notes.create("*inaduible*", "Tinysnout the Brave");
 notes.create("*still inaduible*", "Tinysnout the Brave");
+notes.create("HEBBO!", "Tinysnout the Loud");
 console.log(notes.readAll());
-notes.update(1, "HEBBO!", "Tinysnout the Loud");
-notes.delete(2);
-console.log(notes.readAll());
+
+app.get("/api/notes", (req, res) => {
+  const author = req.query.author;
+  res.json(notes.readAll(author));
+});
+
+app.get("/api/notes/:id", (req, res) => {
+  const id = Number.parseInt(req.params.id);
+  res.json(notes.read(id));
+});
