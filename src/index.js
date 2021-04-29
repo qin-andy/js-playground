@@ -45,11 +45,21 @@ app.get("/api/notes/:id", (req, res) => {
 
 app.post("/api/notes", (req, res) => {
   try {
-  const content = req.body.content;
-  const author = req.body.author;
-  const note = notes.create(content, author);
-  res.status(201).json(note);
+    const content = req.body.content;
+    const author = req.body.author;
+    const note = notes.create(content, author);
+    res.status(201).json(note);
   } catch (error) {
     res.status(400).send(error.message);
+  }
+})
+
+app.delete("/api/notes/:id", (req, res) => {
+  const id = Number.parseInt(req.params.id);
+  const note = notes.delete(id);
+  if (note) {
+    res.json(note);
+  } else {
+    res.status(404).send("File not found!");
   }
 })
