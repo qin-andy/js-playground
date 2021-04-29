@@ -6,8 +6,9 @@ const NoteDao = require("./notes/model/NoteDao.js");
 const port = process.env.PORT || 5000;
 const app = express();
 
-app.use(express.static("src"));
-app.use(express.static("assets"));
+app.use(express.static("src")); // To link JS files to their respective html pages
+app.use(express.static("assets")); // So CSS Files can access assets
+app.use(express.json()); // To process the post requests
 
 app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../public/index.html"));
@@ -41,3 +42,10 @@ app.get("/api/notes/:id", (req, res) => {
   const id = Number.parseInt(req.params.id);
   res.json(notes.read(id));
 });
+
+app.post("/api/notes", (req, res) => {
+  const content = req.body.content;
+  const author = req.body.author;
+  const note = notes.create(content, author);
+  res.status(201).json(note); 
+})
