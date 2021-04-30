@@ -34,7 +34,13 @@ class NoteDao {
     return this.notes;
   }
 
+  // Throws an error if content or author is empty
+  // Returns null if that ID is unavailable
   update(id, content, author) {
+    if (!content || !author) {
+      throw new Error("Invalid attributes!");
+    }
+
     const index = this.notes.findIndex((note) => note._id === id);
     if (index === -1) {
       return null;
